@@ -7,7 +7,7 @@ INTEGER, PLUS, EOF = 'INTEGER', 'PLUS', 'EOF'
 
 class Token(object):
     def __init__(self, type, value):
-        # token type: INTEGER, PULS, EOF
+        # token type: INTEGER, PLUS, EOF
         self.type = type
         self.value = value
 
@@ -75,7 +75,10 @@ class Interpreter(object):
 
     def expr(self):
         """expr -> INTEGER PLUS INTEGER"""
-        # set current token to be a single-digit integer
+        # set current token to the first token taken from the input
+        self.current_token = self.get_next_token()
+
+        # we expect the current token to be a single-digit integer
         left = self.current_token
         self.eat(INTEGER)
 
