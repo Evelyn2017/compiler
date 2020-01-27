@@ -28,8 +28,9 @@ class Token(object):
 class Lexer(object):
 
     def __init__(self, text):
+        # client input string, e.g. "3 * 5", "12 / 3 * 4", etc.
         self.text = text
-
+        # self.pos is an index into self.text.
         self.pos = 0
 
         self.current_char = self.text[self.pos]
@@ -50,7 +51,7 @@ class Lexer(object):
             self.advance()
 
     def integer(self):
-        """Return a (multi_digit) integer consumed from the input"""
+        """Return a (multi-digit) integer consumed from the input"""
         result = ''
         while self.current_char is not None and self.current_char.isdigit():
             result += self.current_char
@@ -148,7 +149,8 @@ def main():
 
 
 if __name__ == '__main__':
+    lexer = Lexer("13 * 5 * 1")
+    print(lexer.get_next_token())
+    print(lexer.get_next_token())
+    print(lexer.get_next_token())
     main()
-    # interpreter = Interpreter("1+ 2")
-    # print(interpreter.get_next_token())
-    # print(interpreter.get_next_token())
