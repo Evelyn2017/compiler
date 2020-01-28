@@ -79,6 +79,7 @@ class Tokenizer(object):
 
         return Token(EOF, None)
 
+
 class Itprt(object):
 
     def __init__(self, tokenizer):
@@ -110,10 +111,13 @@ class Itprt(object):
                 self.eat(MUL)
                 result = result * self.factor()
             if token.type == DIV:
-                # div_factor = self.factor()
-                # assert div_factor != 0
-                self.eat(DIV)
-                result = result / self.factor()
+                try:
+                    self.eat(DIV)
+                    div_factor = self.factor()
+                    result = result / div_factor
+                except Exception:
+                    raise Exception("can not divided by zero!")
+
 
         return result
 
