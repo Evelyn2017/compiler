@@ -146,6 +146,7 @@ class Interprtr(object):
 
         return result
 
+
 def main():
     while True:
         text = input('xx: ')
