@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-string INTEGER = "INTEGER";
+string NUMBER = "NUMBER";
 string PLUS = "PLUS";
 string MINUS = "MINUS";
 string END = "END";
@@ -26,6 +26,10 @@ public:
     
     void error();
 };
+
+Token:: Token() {
+    
+}
 
 Token:: Token(string type, string value) {
     this->type = type;
@@ -47,6 +51,7 @@ public:
     int pos;
     char current_char;
     
+    Lexer();
     Lexer(string text);
     void error();
     Token get_next_token();
@@ -57,6 +62,10 @@ private:
     int integer();
 };
 
+Lexer:: Lexer() {
+    
+}
+
 Lexer:: Lexer(string text) {
     this->text = text;
     this->pos = 0;
@@ -64,7 +73,7 @@ Lexer:: Lexer(string text) {
 }
 
 void Lexer:: error() {
-    cout<<"Invalid syntax!"<<endl;
+    throw "Invalid lexicality!";
 }
 
 /**
@@ -106,7 +115,7 @@ Token Lexer:: get_next_token() {
         }
         
         if (this->current_char <= '9' && this->current_char >= '0')
-            return Token(INTEGER, std:: to_string(this->integer()));
+            return Token(NUMBER, std:: to_string(this->integer()));
         
         if (this->current_char ==  '+') {
             this->advance();
@@ -128,14 +137,37 @@ Token Lexer:: get_next_token() {
 // Parser part.                              //
 ///////////////////////////////////////////////
 class Parser {
-
+public:
+    Lexer lexer;
+    Token current_token;
+    
+    Parser();
+    Parser(Lexer lexer, Token token);
+    
+    void error();
+    
+private:
+    void eat();
 };
+
+Parser:: Parser() {
+    
+}
+
+Parser:: Parser (Lexer lexer, Token token) {
+    this->lexer = lexer;
+    this->current_token = token;
+}
+
+void Parser:: error() {
+    throw "Invalid syntax!";
+}
+
 
 int main(int argc, const char * argv[]) {
     string t = "1+ 2";
     Lexer x = Lexer(t);
-    cout<< x.get_next_token() << x.get_next_token()<< x.get_next_token() << endl;
-//    cout<< x.current_char<<endl;
+    cout<< x.get_next_token()<<endl;
     
     return 0;
 }
