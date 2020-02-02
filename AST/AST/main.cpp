@@ -164,12 +164,12 @@ void Parser:: error() {
 }
 
 
-int main(int argc, const char * argv[]) {
-    string t = "1+ 2";
-    Lexer x = Lexer(t);
-    cout<< x.get_next_token() <<endl;
-    cout<<x.get_next_token()<<endl;
-    cout<<x.get_next_token()<<endl;
-    
-    return 0;
-}
+//int main(int argc, const char * argv[]) {
+//    string t = "1+ 2";
+//    Lexer x = Lexer(t);
+//    cout<< x.get_next_token() <<endl;
+//    cout<<x.get_next_token()<<endl;
+//    cout<<x.get_next_token()<<endl;
+//    
+//    return 0;
+//}
