@@ -9,20 +9,20 @@
 #include <iostream>
 using namespace std;
 
-string NUMBER = "NUMBER";
-string PLUS = "PLUS";
-string MINUS = "MINUS";
-string END = "END";
+enum token_type {
+    NUMBER,
+    PLUS,
+    MINUS,
+    END
+};
 
 class Token {
 public:
-    string type;
+    token_type type;
     string value;
     
     Token();
-    Token(string, string);
-    
-    string to_string();
+    Token(token_type, string);
     
     void error();
 };
@@ -31,13 +31,13 @@ Token:: Token() {
     
 }
 
-Token:: Token(string type, string value) {
+Token:: Token(token_type type, string value) {
     this->type = type;
     this->value = value;
 }
 
 std:: ostream& operator<< (std:: ostream &strm, const Token &token) {
-    return strm << "Token <" << token.type << ", " << token.value << ">" << endl;
+    return strm << "Token <" <<  token.type << ", " << token.value << ">" << endl;
 }
 
 
@@ -167,7 +167,9 @@ void Parser:: error() {
 int main(int argc, const char * argv[]) {
     string t = "1+ 2";
     Lexer x = Lexer(t);
-    cout<< x.get_next_token()<<endl;
+    cout<< x.get_next_token() <<endl;
+    cout<<x.get_next_token()<<endl;
+    cout<<x.get_next_token()<<endl;
     
     return 0;
 }

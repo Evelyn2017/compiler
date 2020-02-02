@@ -12,10 +12,11 @@ using namespace std;
 enum kind {NUMBER, PLUS, MUL};
 
 class Expr {
+public:
     enum kind kind;
 };
 
-class Expr_NUMBER {
+class Expr_NUMBER : Expr{
 public:
     enum kind kind;
     int n;
@@ -28,7 +29,7 @@ Expr_NUMBER:: Expr_NUMBER(int n) {
     this->n = n;
 }
 
-class Expr_PLUS {
+class Expr_PLUS : Expr {
 public:
     enum kind kind;
     Expr *left;
@@ -43,7 +44,7 @@ Expr_PLUS:: Expr_PLUS(Expr *left, Expr *right) {
     this->right = right;
 };
 
-class Expr_MUL {
+class Expr_MUL : Expr{
 public:
     enum kind kind;
     Expr *left;
