@@ -25,9 +25,9 @@ void LL1Analyzer:: make_follow_set(char S) {
 }
 
 int LL1Analyzer:: get_index_terminal(char t) {
-    
+    return 0;
 }
 
 int LL1Analyzer:: get_index_non_terminal(char n_t) {
-    
+    return 0;
 }

@@ -29,6 +29,9 @@ class LL1Analyzer {
 protected:
     Production production[max_size];
     
+    // number of productions in Grammer G.
+    int N;
+    
     vector<char> terminal;
     vector<char> non_terminal;
     
