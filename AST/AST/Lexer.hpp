@@ -15,8 +15,8 @@ using namespace std;
 
 enum token_type {
     NUMBER,
-    PLUS,
-    MINUS,
+    UNARYOP,
+    BINARYOP,
     END
 };
 
@@ -49,7 +49,7 @@ public:
 private:
     void advance();
     void skip_whitespace();
-    int integer();
+    int next_digit();
 };
 
 

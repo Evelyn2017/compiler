@@ -7,3 +7,13 @@
 //
 
 #include "Parser.hpp"
+
+
+Parser:: Parser (Lexer lexer, Token token) {
+    this->lexer = lexer;
+    this->current_token = token;
+}
+
+void Parser:: error() {
+    throw "Invalid syntax!";
+}

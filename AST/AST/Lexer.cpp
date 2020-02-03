@@ -49,7 +49,7 @@ void Lexer:: skip_whitespace() {
  return a multi-integer digit. e.g. 123
  @return 123
  */
-int Lexer:: integer() {
+int Lexer:: next_digit() {
     string res;
     while (this->pos < this->text.length() && this->current_char >= '0' && this->current_char <= '9') {
         res += this->current_char;
@@ -66,16 +66,16 @@ Token Lexer:: get_next_token() {
         }
         
         if (this->current_char <= '9' && this->current_char >= '0')
-            return Token(NUMBER, std:: to_string(this->integer()));
+            return Token(NUMBER, std:: to_string(this->next_digit()));
         
         if (this->current_char ==  '+') {
             this->advance();
-            return Token(PLUS, "+");
+            return Token(BINARYOP, "+");
         }
         
         if (this->current_char == '-') {
             this->advance();
-            return Token(MINUS, "-");
+            return Token(BINARYOP, "-");
         }
         
         this->error();
