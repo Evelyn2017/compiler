@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 enum token_type {
@@ -44,12 +45,13 @@ public:
     Lexer();
     Lexer(string text);
     void error();
-    Token get_next_token();
+    vector<Token> tokenizer();
     
 private:
     void advance();
     void skip_whitespace();
     int next_digit();
+    Token get_next_token();
 };
 
 

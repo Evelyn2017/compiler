@@ -82,3 +82,16 @@ Token Lexer:: get_next_token() {
     }
     return Token(END, "NULL");
 }
+
+
+/**
+ Return a token stream.
+ TODO: finish it.
+ @return [Token<1, 0>, Token]
+ */
+vector<Token> Lexer:: tokenizer() {
+    while (this->get_next_token().type != END) {
+        
+    }
+    return NULL;
+}
