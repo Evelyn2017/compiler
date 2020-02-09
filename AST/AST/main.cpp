@@ -18,9 +18,11 @@ std:: ostream& operator<< (std:: ostream &strm, const Token& token) {
 int main(int argc, const char * argv[]) {
     string t = "1+ 2";
     Lexer x = Lexer(t);
-    cout<< x.get_next_token() <<endl;
-    cout<<x.get_next_token()<<endl;
-    cout<<x.get_next_token()<<endl;
-    
+    cout<< x.token_num();
+    vector<Token> token_stream = x.tokenizer();
+    for(int i = 0; i < token_stream.size(); i++) {
+        cout << "i";
+        cout << token_stream[i] <<endl;
+    }
     return 0;
 }

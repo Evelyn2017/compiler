@@ -14,12 +14,13 @@ Token:: Token(token_type type, string value) {
 }
 
 Lexer:: Lexer() {
-    
+    this->num = 0;
 }
 
 Lexer:: Lexer(string text) {
     this->text = text;
     this->pos = 0;
+    this->num = 0;
     this->current_char = this->text[0];
 }
 
@@ -65,8 +66,10 @@ Token Lexer:: get_next_token() {
             continue;
         }
         
-        if (this->current_char <= '9' && this->current_char >= '0')
+        if (this->current_char <= '9' && this->current_char >= '0') {
             return Token(NUMBER, std:: to_string(this->next_digit()));
+        }
+        
         
         if (this->current_char ==  '+') {
             this->advance();
@@ -83,6 +86,15 @@ Token Lexer:: get_next_token() {
     return Token(END, "NULL");
 }
 
+int Lexer:: token_num() {
+    Token t = this->get_next_token();
+    while (t.type != END) {
+        this->num ++;
+        t = this->get_next_token();
+    }
+    return num;
+}
+
 
 /**
  Return a token stream.
@@ -90,8 +102,12 @@ Token Lexer:: get_next_token() {
  @return [Token<1, 0>, Token]
  */
 vector<Token> Lexer:: tokenizer() {
-    while (this->get_next_token().type != END) {
-        
+    vector<Token> token_stream;
+    int flag = this->num;
+    while (flag > 0) {
+        token_stream.push_back(this->get_next_token());
+        flag --;
     }
-    return NULL;
+    
+    return token_stream;
 }

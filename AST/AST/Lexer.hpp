@@ -41,11 +41,13 @@ public:
     // a pointer to input string `text`.
     int pos;
     char current_char;
+    int num;
     
     Lexer();
     Lexer(string text);
     void error();
     vector<Token> tokenizer();
+    int token_num();
     
 private:
     void advance();
