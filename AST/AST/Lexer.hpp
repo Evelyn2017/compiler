@@ -43,17 +43,25 @@ public:
     char current_char;
     int num;
     
+    vector<Token> token_stream;
+    
     Lexer();
     Lexer(string text);
     void error();
-    vector<Token> tokenizer();
-    int token_num();
+    
+    // return the next token and consume it.
+    Token get_next_token();
+    // look ahead a token w/o consumption.
+    Token peek();
     
 private:
+    // move pointer `pos` ahead.
     void advance();
-    void skip_whitespace();
+    // move pointer `pos` backward.
+    void retreat();
+    void skip_blank();
+    bool is_digit();
     int next_digit();
-    Token get_next_token();
 };
 
 

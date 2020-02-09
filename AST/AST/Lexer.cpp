@@ -29,7 +29,7 @@ void Lexer:: error() {
 }
 
 /**
- move `pos` pointer advance and set the `current_char` variable.
+  move `pos` pointer advance and set the `current_char` variable.
  */
 void Lexer:: advance() {
     this->pos += 1;
@@ -40,7 +40,19 @@ void Lexer:: advance() {
         this->current_char = this->text[this->pos];
 }
 
-void Lexer:: skip_whitespace() {
+/**
+  used in peek(), not moving the `pos` pointer ahead while calling next_digit().
+ */
+void Lexer:: retreat() {
+    this->pos -= 1;
+    if (this->pos >=0) {
+        this->current_char = this->text[this->pos];
+    }
+    else
+        this->current_char = NULL;
+}
+
+void Lexer:: skip_blank() {
     while (this->pos < this->text.length()  && this->current_char == ' ') {
         this->advance();
     }
@@ -59,10 +71,18 @@ int Lexer:: next_digit() {
     return atoi(res.c_str());
 }
 
+bool Lexer:: is_digit() {
+    if (this->current_char <= '9' && this->current_char >= '0') {
+        return true;
+    }
+    return false;
+}
+
 Token Lexer:: get_next_token() {
     while (this->pos < this->text.length()) {
+        
         if (this->current_char == ' ') {
-            this->skip_whitespace();
+            this->skip_blank();
             continue;
         }
         
@@ -86,28 +106,11 @@ Token Lexer:: get_next_token() {
     return Token(END, "NULL");
 }
 
-int Lexer:: token_num() {
-    Token t = this->get_next_token();
-    while (t.type != END) {
-        this->num ++;
-        t = this->get_next_token();
-    }
-    return num;
+Token Lexer:: peek() {
+    Token token = get_next_token();
+    retreat();
+    return token;
 }
 
 
-/**
- Return a token stream.
- TODO: finish it.
- @return [Token<1, 0>, Token]
- */
-vector<Token> Lexer:: tokenizer() {
-    vector<Token> token_stream;
-    int flag = this->num;
-    while (flag > 0) {
-        token_stream.push_back(this->get_next_token());
-        flag --;
-    }
-    
-    return token_stream;
-}
+
