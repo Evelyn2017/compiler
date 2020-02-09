@@ -58,7 +58,7 @@ private:
     // move pointer `pos` ahead.
     void advance();
     // move pointer `pos` backward.
-    void retreat();
+    void retreat(Token token);
     void skip_blank();
     bool is_digit();
     int next_digit();

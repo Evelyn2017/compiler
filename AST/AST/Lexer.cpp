@@ -43,13 +43,13 @@ void Lexer:: advance() {
 /**
   used in peek(), not moving the `pos` pointer ahead while calling next_digit().
  */
-void Lexer:: retreat() {
-    this->pos -= 1;
-    if (this->pos >=0) {
+void Lexer:: retreat(Token token) {
+    long len = token.value.length();
+    int i;
+    for(i = 0; i < len; i++) {
+        this->pos -= 1;
         this->current_char = this->text[this->pos];
     }
-    else
-        this->current_char = NULL;
 }
 
 void Lexer:: skip_blank() {
@@ -64,7 +64,7 @@ void Lexer:: skip_blank() {
  */
 int Lexer:: next_digit() {
     string res;
-    while (this->pos < this->text.length() && this->current_char >= '0' && this->current_char <= '9') {
+    while (this->pos < this->text.length() && is_digit()) {
         res += this->current_char;
         this->advance();
     }
@@ -86,7 +86,7 @@ Token Lexer:: get_next_token() {
             continue;
         }
         
-        if (this->current_char <= '9' && this->current_char >= '0') {
+        if (this->is_digit()) {
             return Token(NUMBER, std:: to_string(this->next_digit()));
         }
         
@@ -108,9 +108,7 @@ Token Lexer:: get_next_token() {
 
 Token Lexer:: peek() {
     Token token = get_next_token();
-    retreat();
+    retreat(token);
     return token;
 }
-
-
 

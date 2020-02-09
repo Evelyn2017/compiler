@@ -29,18 +29,18 @@ std:: ostream& operator<< (std:: ostream &strm, const Token& token) {
 
 
 int main() {
-    string input = "1+ 2 +   3";
+    string input = "12+ 224 +   33 + 22";
     Lexer l = Lexer(input);
-    Token p1 = l.peek();
-    cout<<"peek1: " << p1 << endl;
-    Token n1 = l.get_next_token();
-    cout << "next1: " << n1 << endl;
-    p1 = l.peek();
-    cout << "peek2: " << p1 << endl;
-    p1 = l.peek();
-    cout<< "peek3: " << p1 << endl;
-    n1 = l.get_next_token();
-    n1 = l.get_next_token();
-    cout << "peek4: "<< l.peek() << endl;
+    cout<<"peek1: "<<l.peek()<<endl;
+    cout<<"next1: "<<l.get_next_token()<<endl;
+    cout<<"peel2: "<<l.peek()<<endl;
+    cout<<"peek3: "<<l.peek() <<endl;
+    l.get_next_token();
+    l.get_next_token();
+    l.get_next_token();
+    cout<<"peek4: "<<l.peek()<<endl;
+    cout<<"next2-4:" <<l.get_next_token()<<endl;
+    cout<<"peek4: "<<l.peek()<<endl;
+    
     return 0;
 }
