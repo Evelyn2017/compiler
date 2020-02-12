@@ -46,10 +46,9 @@ void Lexer:: advance() {
 void Lexer:: retreat(Token token) {
     long len = token.value.length();
     int i;
-    for(i = 0; i < len; i++) {
+    for(i = 0; i < len; i++) 
         this->pos -= 1;
-        this->current_char = this->text[this->pos];
-    }
+    this->current_char = this->text[this->pos];
 }
 
 void Lexer:: skip_blank() {

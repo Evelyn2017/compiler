@@ -18,6 +18,7 @@ enum token_type {
     NUMBER,
     UNARYOP,
     BINARYOP,
+    EPSILON,
     END
 };
 
