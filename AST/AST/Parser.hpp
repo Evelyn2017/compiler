@@ -31,6 +31,8 @@ public:
     Token peek();
     Token consume();
     
+private:
+    void crack_gramer();
 };
 
 #endif /* Parser_hpp */

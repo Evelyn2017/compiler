@@ -53,11 +53,16 @@ protected:
     int get_index_terminal(char t);
     int get_index_non_terminal(char n_t);
     
+    
+    
 public:
     LL1Analyzer(int N) {};
+    LL1Analyzer() {};
     
     void output_first_set();
     void output_follow_set();
+    void crack_grammer(string g);
+    vector<string> split(string str, char a);
     
 };
 

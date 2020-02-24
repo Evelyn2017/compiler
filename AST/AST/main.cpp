@@ -65,17 +65,7 @@ void crack_grammer() {
         cout<<*it<<" ";
 }
 
-int main() {
+//int main() {
 //    crack_grammer();
-    int a = 1;
-    int* p = &a;
-    p++;
-    
-    char c = '1';
-    char* b = &c;
-    b++;
-    cout << b<<" "<<&c<<endl;
-    
-    cout<<p<<", "<<&a<<", "<<*p++<<endl;
-    return 0;
-}
+//    return 0;
+//}

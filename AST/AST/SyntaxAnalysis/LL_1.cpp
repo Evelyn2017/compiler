@@ -51,4 +51,60 @@ int LL1Analyzer:: get_index_non_terminal(char n_t) {
     return -1;
 }
 
+void LL1Analyzer::  crack_grammer(string g) {
+    set<char> non_t;
+    set<char> t;
+    
+    string line;
+    ifstream g_file(g);
+    if (!g_file.is_open()) {
+        cout<<"error openning file" <<endl;
+        exit(1);
+    }
+    while (getline(g_file, line)) {
+        vector<string> p = split(line, ':');
+        // left part of a production is always a non_ternimal.
+        char p_left = p[0].front();
+        this->non_terminal.push_back(p_left);
+        
+        vector<string> p_right = split(p[1], ' ');
+//        this->terminal.push_back(p_right);
+        
+    }
+    
+    set<char> :: iterator it;
+    for (it = non_t.begin(); it != non_t.end(); it++) {
+        cout<<*it<<" ";
+    }
+    
+}
+
+/**
+ split production left and right.
+
+ @param str S : XY
+ @param a :
+ @return [S, XY]
+ */
+vector<string> LL1Analyzer:: split(string str, char a) {
+    vector<string> strvec;
+    string:: size_type pos1, pos2;
+    pos1 = 0;
+    pos2 = str.find(a);
+    while (string:: npos != pos2) {
+        strvec.push_back(str.substr(pos1, pos2 - pos1));
+        
+        pos1 = pos2 + 1;
+        pos2 = str.find(a, pos1);
+    }
+    
+    strvec.push_back(str.substr(pos1));
+    return strvec;
+}
+
+int main() {
+    LL1Analyzer ll1;
+    string filename = "g.txt";
+    cout<<ll1.split("S:XY", ':')[1]<<endl;
+}
 
